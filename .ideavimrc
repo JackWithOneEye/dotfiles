@@ -1,0 +1,105 @@
+""" Common settings -------------------------
+set showmode
+set so=5
+set incsearch
+"set hlsearch
+set rnu
+set timeout=100
+
+set ideajoin
+set clipboard=ideaput
+
+set mini-ai
+set which-key
+
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdtree'
+
+""" Mappings --------------------------------
+let mapleader = ' '
+
+map <C-space> <Action>(EditorSelectWord)
+imap <C-space> <Action>(CodeCompletion)
+map <bs> <Action>(EditorUnSelectWord)
+nmap <A-n> <Action>(GotoNextElementUnderCaretUsage)
+nmap ]] <Action>(GotoNextElementUnderCaretUsage)
+nmap <A-p> <Action>(GotoPrevElementUnderCaretUsage)
+nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
+map L <Action>(NextTab)
+map H <Action>(PreviousTab)
+map K <Action>(ShowHoverInfo)
+map Q <Action>(QuickImplementations)
+
+map <C-/> <Action>(ActivateTerminalToolWindow)
+
+map<C-l> <Action>(NextSplitter)
+map<C-h> <Action>(PrevSplitter)
+
+map<A-k> <Action>(MoveLineUp)
+map<A-S-k> <Action>(MoveStatementUp)
+map<A-j> <Action>(MoveLineDown)
+map<A-S-j> <Action>(MoveStatementDown)
+
+map gI <Action>(GotoImplementation)
+map gr <Action>(ShowUsages)
+map gy <Action>(GotoTypeDeclaration)
+
+map " :reg <CR>
+map ' :marks <CR>
+
+map ]a <Action>(NextParameter)
+map [a <Action>(PrevParameter)
+
+map ]f <Action>(MethodDown)
+map [f <Action>(MethodUp)
+
+map ]e <Action>(GotoNextError)
+map [e <Action>(GotoPreviousError)
+
+map <leader>e :NERDTreeToggle <CR>
+map <leader>E :NERDTreeFind <CR>
+
+map <leader>, <Action>(Switcher)
+
+map <leader>/ <Action>(TextSearchAction)
+map <leader><space> <Action>(GotoFile)
+map <leader>fn <Action>(NewFile)
+map <leader>fr <Action>(RecentFiles)
+
+map <leader>bd <Action>(CloseContent)
+map <leader>bD <Action>(CloseAllEditors)
+map <leader>bo <Action>(CloseAllEditorsButActive)
+map <leader>br <Action>(CloseAllToTheRight)
+map <leader>bl <Action>(CloseAllToTheLeft)
+map <leader>bp <Action>(PinActiveEditorTab)
+map <leader>bP <Action>(CloseAllUnpinnedEditors)
+map <leader>bR <Action>(ReopenClosedTab)
+
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>cr <Action>(RenameElement)
+map <leader>cR <Action>(RenameFile)
+map <leader>cd <Action>(ShowErrorDescription)
+map <leader>cf <Action>(ReformatCode)
+
+map <leader>db <Action>(ToggleLineBreakpoint)
+map <leader>dB <Action>(AddConditionalBreakpoint)
+map <leader>dc <Action>(Resume)
+map <leader>dC <Action>(RunToCursor)/
+map <leader>de <Action>(QuickEvaluateExpression)
+map <leader>dE <Action>(EvaluateExpression)
+map <leader>di <Action>(StepInto)
+map <leader>dm <Action>(XDebugger.MuteBreakpoints)
+map <leader>do <Action>(StepOut)
+map <leader>dO <Action>(StepOver)
+
+map <leader>dfC <Action>(ForceRunToCursor)
+map <leader>dfi <Action>(ForceStepInto)
+map <leader>dfO <Action>(ForceStepOver)
+
+map <leader>dsi <Action>(SmartStepInto)
+
+map <leader>gb <Action>(Annotate)
+
+map <leader>sr <Action>(Replace)
+
