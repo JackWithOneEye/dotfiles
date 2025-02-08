@@ -2,51 +2,101 @@
 set showmode
 set so=5
 set incsearch
-"set hlsearch
+set hlsearch
 set rnu
-set timeout=100
+set notimeout
+set timeoutlen=5000
 
 set ideajoin
 set clipboard=ideaput
 
+""" Plugins -------------------------
 set mini-ai
+set peekaboo
+set quickscope
 set which-key
 
-Plug 'machakann/vim-highlightedyank'
-Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/argtextobj.vim'
 Plug 'preservim/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
+Plug 'easymotion/vim-easymotion'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-surround'
+
+""" Plugin settings -------------------------
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 """ Mappings --------------------------------
 let mapleader = ' '
 
-map <C-space> <Action>(EditorSelectWord)
-imap <C-space> <Action>(CodeCompletion)
-map <bs> <Action>(EditorUnSelectWord)
-nmap <A-n> <Action>(GotoNextElementUnderCaretUsage)
-nmap ]] <Action>(GotoNextElementUnderCaretUsage)
-nmap <A-p> <Action>(GotoPrevElementUnderCaretUsage)
-nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
+nmap <Esc> :nohlsearch<CR>
+map <tab><tab> <Plug>(easymotion-prefix)
+map <tab><tab>a <Plug>(acejump-linemarks)
+
+""" Tabs/Windows --------------------------------
 map L <Action>(NextTab)
 map H <Action>(PreviousTab)
-map K <Action>(ShowHoverInfo)
-map Q <Action>(QuickImplementations)
+map <leader>bd <Action>(CloseContent)
+map <leader>bD <Action>(CloseAllEditors)
+map <leader>bo <Action>(CloseAllEditorsButActive)
+map <leader>br <Action>(CloseAllToTheRight)
+map <leader>bl <Action>(CloseAllToTheLeft)
+map <leader>bp <Action>(PinActiveEditorTab)
+map <leader>bP <Action>(CloseAllUnpinnedEditors)
+map <leader>bR <Action>(ReopenClosedTab)
 
-map <C-/> <Action>(ActivateTerminalToolWindow)
+noremap<C-h> <C-w>h
+noremap<C-j> <C-w>j
+noremap<C-k> <C-w>k
+noremap<C-l> <C-w>l
+map<leader>wd <Action>(CloseAllEditors)
+map<leader>wo <C-w>o
+map<leader>ws <C-w>s
+map<leader>wS <Action>(MoveTabDown)
+map<leader>wv <C-w>v
+map<leader>wV <Action>(MoveTabRight)
+map<leader>ww <C-w>w
+map<leader>wu <Action>(Unsplit)
+map<leader>wU <Action>(UnsplitAll)
+map<leader>wc <Action>(ChangeSplitOrientation)
+map<leader>w> <Action>(StretchSplitToRight)
+map<leader>w< <Action>(StretchSplitToLeft)
+map<leader>w+ <Action>(StretchSplitToTop)
+map<leader>w- <Action>(StretchSplitToBottom)
+map<leader>w<space> <Action>(MaximizeEditorInSplit)
 
-map<C-l> <Action>(NextSplitter)
-map<C-h> <Action>(PrevSplitter)
-
+""" Editing --------------------------------
 map<A-k> <Action>(MoveLineUp)
 map<A-S-k> <Action>(MoveStatementUp)
 map<A-j> <Action>(MoveLineDown)
 map<A-S-j> <Action>(MoveStatementDown)
 
+map <C-space> <Action>(EditorSelectWord)
+vmap <bs> <Action>(EditorUnSelectWord)
+imap <C-space> <Action>(CodeCompletion)
+
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>cr <Action>(RenameElement)
+map <leader>cR <Action>(RenameFile)
+map <leader>cd <Action>(ShowErrorDescription)
+map <leader>cf <Action>(ReformatCode)
+
+map sa <Plug>YSurround
+map sA <Plug>Yssurround
+map sd <Plug>DSurround
+map sr <Plug>CSurround
+xmap s <Plug>VSurround
+
+vnoremap < <gv
+vnoremap > >gv
+
+""" Navigation --------------------------------
 map gI <Action>(GotoImplementation)
 map gr <Action>(ShowUsages)
 map gy <Action>(GotoTypeDeclaration)
-
-map " :reg <CR>
-map ' :marks <CR>
+map g, <Action>(JumpToLastChange)
+map g; <Action>(JumpToNextChange)
 
 map ]a <Action>(NextParameter)
 map [a <Action>(PrevParameter)
@@ -57,31 +107,29 @@ map [f <Action>(MethodUp)
 map ]e <Action>(GotoNextError)
 map [e <Action>(GotoPreviousError)
 
+nmap <A-n> <Action>(GotoNextElementUnderCaretUsage)
+nmap ]] <Action>(GotoNextElementUnderCaretUsage)
+nmap <A-p> <Action>(GotoPrevElementUnderCaretUsage)
+nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
+
+""" Refactor --------------------------------
+map <leader>rl <Action>(Refactorings.QuickListPopupAction)
+map <leader>ru <Action>(Unwrap)
+
+""" Explorer --------------------------------
 map <leader>e :NERDTreeToggle <CR>
 map <leader>E :NERDTreeFind <CR>
 
-map <leader>, <Action>(Switcher)
-
-map <leader>/ <Action>(TextSearchAction)
+""" Search --------------------------------
+map <leader>/ <Action>(FindInPath)
 map <leader><space> <Action>(GotoFile)
 map <leader>fn <Action>(NewFile)
 map <leader>fr <Action>(RecentFiles)
+map <leader>fl <Action>(RecentLocations)
+map <leader>sr <Action>(Replace)
+map <leader>, <Action>(Switcher)
 
-map <leader>bd <Action>(CloseContent)
-map <leader>bD <Action>(CloseAllEditors)
-map <leader>bo <Action>(CloseAllEditorsButActive)
-map <leader>br <Action>(CloseAllToTheRight)
-map <leader>bl <Action>(CloseAllToTheLeft)
-map <leader>bp <Action>(PinActiveEditorTab)
-map <leader>bP <Action>(CloseAllUnpinnedEditors)
-map <leader>bR <Action>(ReopenClosedTab)
-
-map <leader>ca <Action>(ShowIntentionActions)
-map <leader>cr <Action>(RenameElement)
-map <leader>cR <Action>(RenameFile)
-map <leader>cd <Action>(ShowErrorDescription)
-map <leader>cf <Action>(ReformatCode)
-
+""" Debugger --------------------------------
 map <leader>db <Action>(ToggleLineBreakpoint)
 map <leader>dB <Action>(AddConditionalBreakpoint)
 map <leader>dc <Action>(Resume)
@@ -92,14 +140,45 @@ map <leader>di <Action>(StepInto)
 map <leader>dm <Action>(XDebugger.MuteBreakpoints)
 map <leader>do <Action>(StepOut)
 map <leader>dO <Action>(StepOver)
-
 map <leader>dfC <Action>(ForceRunToCursor)
 map <leader>dfi <Action>(ForceStepInto)
 map <leader>dfO <Action>(ForceStepOver)
-
 map <leader>dsi <Action>(SmartStepInto)
 
+""" Menu --------------------------------
+nmap <leader>mm <Action>(MainMenu)
+nmap <leader>ma <Action>(AnalyzeMenu)
+nmap <leader>mb <Action>(BuildMenu)
+nmap <leader>mc <Action>(CodeMenu)
+nmap <leader>mf <action>(findmenugroup)
+nmap <leader>mg <Action>(GoToMenu)
+nmap <leader>ms <Action>(ScopeViewPopupMenu)
+nmap <leader>mt <Action>(EditorTabPopupMenu)
+nmap <leader>mw <Action>(ToolWindowsGroup)
+
+""" Git --------------------------------
 map <leader>gb <Action>(Annotate)
 
-map <leader>sr <Action>(Replace)
+""" Harpoon --------------------------------
+map <leader>h <Action>(ShowHarpoon)
+map <leader>H <Action>(AddToHarpoon)
+map <leader>1 <Action>(GotoHarpoon1)
+map <leader>2 <Action>(GotoHarpoon2)
+map <leader>3 <Action>(GotoHarpoon3)
+map <leader>4 <Action>(GotoHarpoon4)
+map <leader>5 <Action>(GotoHarpoon5)
+
+""" Misc. --------------------------------
+map K <Action>(ShowHoverInfo)
+map Q <Action>(QuickImplementations)
+
+map <leader>a <Action>(GotoAction)
+
+nmap <leader><C-a> <Action>($SelectAll)
+nmap <leader><C-c> <Action>(EditorCopy)
+nmap <leader><C-v> <Action>(EditorPaste)
+
+map <leader>z <Action>(ToggleZenMode)
+map <C-/> <Action>(ActivateTerminalToolWindow)
+map <leader><C-S-r> <Action>(IdeaVim.ReloadVimRc.reload)
 
