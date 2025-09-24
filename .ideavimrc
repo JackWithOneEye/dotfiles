@@ -82,10 +82,10 @@ map <leader>cR <Action>(RenameFile)
 map <leader>cd <Action>(ShowErrorDescription)
 map <leader>cf <Action>(ReformatCode)
 
-map sa <Plug>YSurround
-map sA <Plug>Yssurround
-map sd <Plug>DSurround
-map sr <Plug>CSurround
+nmap sa <Plug>YSurround
+nmap sA <Plug>Yssurround
+nmap sd <Plug>DSurround
+nmap sr <Plug>CSurround
 xmap s <Plug>VSurround
 
 vnoremap < <gv
@@ -128,6 +128,7 @@ map <leader>fr <Action>(RecentFiles)
 map <leader>fl <Action>(RecentLocations)
 map <leader>sr <Action>(Replace)
 map <leader>, <Action>(Switcher)
+map <leader>. <Action>(FileStructurePopup)
 
 """ Debugger --------------------------------
 map <leader>db <Action>(ToggleLineBreakpoint)
@@ -168,6 +169,23 @@ map <leader>3 <Action>(GotoHarpoon3)
 map <leader>4 <Action>(GotoHarpoon4)
 map <leader>5 <Action>(GotoHarpoon5)
 
+""" Yank/Paste --------------------------------
+nnoremap Y yg$
+nmap <leader>y "+y
+vmap <leader>y "+y
+
+nmap <leader>p "+p
+vmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>P "+P
+
+xnoremap <leader><C-p> "_dP
+
+""" Tools --------------------------------
+map <leader>td <Action>(ActivateDatabaseToolWindow)
+map <leader>tg <Action>(ActivateGitHubCopilotChatToolWindow)
+map <leader>tj <Action>(ActivateElectroJunToolWindowToolWindow)
+
 """ Misc. --------------------------------
 map K <Action>(ShowHoverInfo)
 map Q <Action>(QuickImplementations)
@@ -175,10 +193,14 @@ map Q <Action>(QuickImplementations)
 map <leader>a <Action>(GotoAction)
 
 nmap <leader><C-a> <Action>($SelectAll)
-nmap <leader><C-c> <Action>(EditorCopy)
 nmap <leader><C-v> <Action>(EditorPaste)
 
 map <leader>z <Action>(ToggleZenMode)
 map <C-/> <Action>(ActivateTerminalToolWindow)
 map <leader><C-S-r> <Action>(IdeaVim.ReloadVimRc.reload)
-
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap <leader><Enter> m`o<Esc>``
+nnoremap <leader><S-Enter> m`O<Esc>``
